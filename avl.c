@@ -134,10 +134,12 @@ void rotacaoSimplesDireita(TpArvore *AVL, TpNodo *desb){
 	}else{
 		if(aux->info < desb->pai->info){ // pai esta a direita de aux
 			desb->pai->esq = aux;
+			aux->pai = desb->pai;
 		}else if(aux->info > desb->pai->info){ // pai esta a esquerda de aux
 			desb->pai->dir = aux;
+			aux->pai = desb->pai;
 		}
-		aux->pai = desb->pai;
+		
 	}
 }
 
@@ -162,10 +164,11 @@ void rotacaoSimplesEsquerda(TpArvore *AVL, TpNodo *desb){
 	}else{
 		if(aux->info > desb->pai->info){ // pai esta a esquerda de aux
 			desb->pai->dir = aux;
+			aux->pai = desb->pai;
 		}else if(aux->info < desb->pai->info){ // pai esta a direita de aux
 			desb->pai->esq = aux;
+			aux->pai = desb->pai;
 		}
-		aux->pai = desb->pai;
 	}
 }
 
@@ -173,65 +176,39 @@ void rotacaoSimplesEsquerda(TpArvore *AVL, TpNodo *desb){
 void rotacaoDuplaDireita(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao DUPLA a direita\n");
 	//printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->dir->info);
-	TpNodo *aux;
-	TpNodo *aux2;
-
-	aux = desb->esq;
-	aux2 = aux->dir;
+	TpNodo *aux = desb->esq;
+	TpNodo *aux2 = aux->dir;
 
 	if(aux2->esq != NULL){
 		aux->dir = aux2->esq;
 		aux2->esq->pai = aux;
-		aux2->esq = aux;
 	}else{
 		aux->dir = NULL;
 	}
-
-	aux2->pai = desb;
-	if(aux2->info < desb->info){
-		desb->esq = aux2;
-	}else{
-		desb->dir = aux2;
-	}
+	aux2->esq = aux;
 	aux->pai = aux2;
-	if(aux->info < aux2->info){
-		aux2->esq = aux;
-	}else{
-		aux->dir = aux;
-	}
+	desb->esq = aux2;
+	aux2->pai = desb;	
 	rotacaoSimplesDireita(AVL, desb);
-	
 }
 
 // rotacao dupla esquerda
 void rotacaoDuplaEsquerda(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao DUPLA a esquerda\n");
 	//printf("nodos envolvidos %d %d %d", desb->info, desb->dir->info, desb->dir->esq->info);
-	TpNodo *aux;
-	TpNodo *aux2;
-
-	aux = desb->dir;
-	aux2 = aux->esq;
+	TpNodo *aux = desb->dir;
+	TpNodo *aux2 = aux->esq;
 
 	if(aux2->dir != NULL){
 		aux->esq = aux2->dir;
 		aux2->dir->pai = aux;
-		aux2->dir = aux;
-		aux->pai = aux2;
 	}else{
 		aux->esq = NULL;
 	}
+	aux2->dir = aux;
+	aux->pai = aux2;
+	desb->dir = aux2;
 	aux2->pai = desb;
-	if(aux2->info < desb->info){
-		desb->esq = aux2;
-	}else{
-		desb->dir = aux2;
-	}
-	if(aux->info < aux2->info){
-		aux2->esq = aux;
-	}else{
-		aux->dir = aux;
-	}	
 	rotacaoSimplesEsquerda(AVL, desb);
 	
 }
