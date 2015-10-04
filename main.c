@@ -2,6 +2,21 @@
 #include "manArq.h"
 
 int main(int argc, char **argv){
+
+	TpArvore *teste = criaArvoreVazia();
+	inserir("abacate", teste->root, teste);
+	inserir("aba", teste->root, teste);
+	inserir("abac", teste->root, teste);
+	inserir("abacat", teste->root, teste);
+	inserir("aacate", teste->root, teste);
+	inserir("bacate", teste->root, teste);
+	imprimir(teste->root);
+
+	/*
+
+
+
+	
 	//char **arquivos; // para armazenar o nome dos arquivos
 	//int i = 0;
 	int op;
@@ -55,26 +70,27 @@ int main(int argc, char **argv){
 						//}
 					}// nesse ponto files é um vetor de nomes válidos de arquivos a serem indexados (o ID de cada arquivo é sua posição em files + 1, ou seja i+1)
 					fclose(pFileTable);
-
+					*/
 					/*
 					int cont;
 					printf("\nimprimindo o nome dos arquivos >>\n");
 					for(cont = 0; cont < nFiles; cont++){ printf("[%s]\n", files[cont]); }
 					*/
 					// ok ate aqui. Unico problema é q quando imprime o nome dos arquivos esta imprimindo lixo
-
+					/*
+					
 					// -- criar arvore aqui
 						// criar arvore de A até E
 						TpArvore *AateE = criaArvoreVazia();
 						// criar arvore de F até J
-						TpArvore *FateJ = criaArvoreVazia();
+						//TpArvore *FateJ = criaArvoreVazia();
 						// criar arvore de K ate O
-						TpArvore *KateO = criaArvoreVazia();
+						//TpArvore *KateO = criaArvoreVazia();
 						// criar arvore de P até T
-						TpArvore *PateT = criaArvoreVazia();
+						//TpArvore *PateT = criaArvoreVazia();
 						// criar arvore de U até Z
-						TpArvore *UateZ = criaArvoreVazia();
-
+						//TpArvore *UateZ = criaArvoreVazia();
+					
 						printf("analisando arquivo >>");
 						for(j=0;j < i;j++){// analisa 1 arquivo por vez
 							printf("[%s]\n", files[j]);
@@ -97,11 +113,28 @@ int main(int argc, char **argv){
 								//analisar aqui e por na arvore a ocorrencia junto com o ID do arq 
 								printf("antes len:%d\n", (int)strlen(buffer));
 								
-								ajustaStr(buffer); /* feito, ta sem o \n no fim da string. 
+								ajustaStr(buffer);*/ /* feito, ta sem o \n no fim da string. 
 													Temos que olhar p ela como se fosse uma sequencia de palavras independente da iteração
 													* Ou seja, uma palavra pode começar em uma iteração e terminar em outra, abc*/
+								/*
 								printf("dps len:%d\n", (int)strlen(buffer));
 
+								char *pch;
+								printf ("%s  em tokens: \n Splitting seqüência \n", buffer);
+								pch = strtok (buffer, ", .-?!,.:;");
+								if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
+										inserir(pch, AateE->root, AateE);
+										imprimir(AateE->root);
+								}
+								while (pch != NULL){
+									printf ("%s \n", pch);
+									*//*if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
+										inserir(pch, AateE->root, AateE);
+										imprimir(AateE->root);
+									}*/
+									/*
+									pch = strtok (NULL, ", .-?!,.:;");
+								}
 								
 								
 								//isalpha(buffer[j]);
@@ -109,14 +142,15 @@ int main(int argc, char **argv){
 								puts(".");
 									
 								}
-								/*--------------
+								*//*--------------
 								varrer os arquivos carregando as palavras  
 								*/
 								//fclose(pFile);
 								//pFile = NULL;
+								/*
 							}
 
-
+							*/
 
 
 							/*
@@ -174,7 +208,7 @@ int main(int argc, char **argv){
 									
 									return arquivos;
 								}
-							}*/
+							}*/ /*
 				}
 				break;
 			case 2 :
@@ -186,6 +220,8 @@ int main(int argc, char **argv){
 			
 		}		
 	}while(op != 0);
+
+	*/
 return 0;
 }
 

@@ -6,7 +6,7 @@ TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree){
 	if(tree->root == NULL){ // arvore vazia - inserir primeiro nodo
 		TpNodo *new = (TpNodo*) malloc(sizeof(TpNodo));
 		if(new != NULL){
-			new->info = (char*) malloc(sizeof(char));
+			new->info = (char*) malloc(sizeof(char) * strlen(palavra));
 			strcpy(new->info, palavra);
 			tree->root = new;
 			return new;
