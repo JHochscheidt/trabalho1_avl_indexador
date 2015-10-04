@@ -43,4 +43,5 @@ void calcula_fator(TpNodo* root);
 void rotacaoSimplesDireita(TpArvore *AVL, TpNodo *desb);
 void rotacaoSimplesEsquerda(TpArvore *AVL, TpNodo *desb);
 void rotacaoDuplaDireita(TpArvore *AVL, TpNodo *desb);
+void rotacaoDuplaEsquerda(TpArvore *AVL, TpNodo *desb);
 
