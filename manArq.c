@@ -71,10 +71,22 @@ char **verifica_arquivos_entrada(int argc, char **argv){
 	// ok ate aqui. Unico problema é q quando imprime o nome dos arquivos esta imprimindo lixo
 
 	// -- criar arvore aqui
+		// criar arvore de A até E
+		//TpArvore *AateE = criaArvoreVazia();
+		// criar arvore de F até J
+		//TpArvore *FateJ = criaArvoreVazia();
+		// criar arvore de K ate O
+		//TpArvore *KateO = criaArvoreVazia();
+		// criar arvore de P até T
+		//TpArvore *PateT = criaArvoreVazia();
+		// criar arvore de U até Z
+		//TpArvore *UateZ = criaArvoreVazia();
+	
 
-	puts("analisando arquivo por arquivo>>\n");
+	
+	printf("analisando arquivo >>");
 	for(j=0;j < i;j++){// analisa 1 arquivo por vez
-		printf("arquivo [%s]", files[j]);
+		printf("[%s]\n", files[j]);
 		if(files[j] == NULL)
 			continue;
 
@@ -86,17 +98,19 @@ char **verifica_arquivos_entrada(int argc, char **argv){
 		}
 		fseek(pFile, 0, SEEK_END); // posiciona para o final do arquivo
 		int tamanhoArquivo = ftell(pFile); // retorna a ultima posicao do arquivo, ou seja o tamanho dele
-
+		rewind(pFile); // volta arquivo para o começo
 		char *buffer = (char*) malloc(sizeof(char) * tamanhoArquivo); // buffer do tamanho do arquivo
 
-		while(fgets(buffer,tamanhoArquivo,pFile) != NULL){//pega por linha ou no max 512 caracteres
-			//analisar aqui e por na arvore a ocorrencia junto com o ID do arq (provavelmente uma trie compacta)
+		puts("aqui");
+		while(fgets(buffer,tamanhoArquivo,pFile) != NULL){//pega por linha ou o arquivo inteiro
+			//analisar aqui e por na arvore a ocorrencia junto com o ID do arq 
 			printf("antes len:%d\n", (int)strlen(buffer));
 			
 			ajustaStr(buffer); /* feito, ta sem o \n no fim da string. 
 								Temos que olhar p ela como se fosse uma sequencia de palavras independente da iteração
 								* Ou seja, uma palavra pode começar em uma iteração e terminar em outra, abc*/
 			printf("dps len:%d\n", (int)strlen(buffer));
+			
 			//isalpha(buffer[j]);
 			puts(buffer);
 			puts(".");
