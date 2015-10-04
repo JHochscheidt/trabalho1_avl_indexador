@@ -103,31 +103,35 @@ int main(int argc, char **argv){
 								}
 								while (pch != NULL){
 									printf ("%s \n", pch);
-									*//*if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
+									if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
 										inserir(pch, AateE->root, AateE);
 										imprimir(AateE->root);
-									}*/
-									/*
+									}else if(strncmp(pch, "F", 1) == 0 || strncmp(pch, "f", 1) == 0 || strncmp(pch, "G", 1) == 0 || strncmp(pch, "g", 1) == 0 || strncmp(pch, "H", 1) == 0 || strncmp(pch, "h", 1) == 0 || strncmp(pch, "I", 1) == 0 || strncmp(pch, "i", 1) == 0 || strncmp(pch, "J", 1) == 0 || strncmp(pch, "j", 1) == 0){
+										inserir(pch, FateJ->root, FateJ);
+										imprimir(FateJ->root);
+									}else if(strncmp(pch, "K", 1) == 0 || strncmp(pch, "k", 1) == 0 || strncmp(pch, "L", 1) == 0 || strncmp(pch, "l", 1) == 0 || strncmp(pch, "M", 1) == 0 || strncmp(pch, "m", 1) == 0 || strncmp(pch, "N", 1) == 0 || strncmp(pch, "n", 1) == 0 || strncmp(pch, "O", 1) == 0 || strncmp(pch, "o", 1) == 0){
+										inserir(pch, KateO->root, KateO);
+										imprimir(KateO->root);
+									}else if(strncmp(pch, "P", 1) == 0 || strncmp(pch, "p", 1) == 0 || strncmp(pch, "Q", 1) == 0 || strncmp(pch, "q", 1) == 0 || strncmp(pch, "R", 1) == 0 || strncmp(pch, "r", 1) == 0 || strncmp(pch, "S", 1) == 0 || strncmp(pch, "s", 1) == 0 || strncmp(pch, "T", 1) == 0 || strncmp(pch, "t", 1) == 0){
+										inserir(pch, PateT->root, PateT);
+										imprimir(PateT->root);
+									}else if(strncmp(pch, "U", 1) == 0 || strncmp(pch, "u", 1) == 0 || strncmp(pch, "V", 1) == 0 || strncmp(pch, "v", 1) == 0 || strncmp(pch, "W", 1) == 0 || strncmp(pch, "w", 1) == 0 || strncmp(pch, "X", 1) == 0 || strncmp(pch, "x", 1) == 0 || strncmp(pch, "Y", 1) == 0 || strncmp(pch, "y", 1) == 0 || strncmp(pch, "|", 1) == 0 || strncmp(pch, "z", 1) == 0){
+										inserir(pch, UateZ->root, UateZ);
+										imprimir(UateZ->root);
+									}							
 									pch = strtok (NULL, ", .-?!,.:;");
 								}
-								
-								
 								//isalpha(buffer[j]);
 								puts(buffer);
 								puts(".");
 									
 								}
-								*//*--------------
+								/*--------------
 								varrer os arquivos carregando as palavras  
 								*/
 								//fclose(pFile);
 								//pFile = NULL;
-								/*
 							}
-
-							*/
-
-
 							/*
 							for(i = 1; i < argc; i++){
 								arq = fopen(argv[i], "r");
@@ -183,7 +187,7 @@ int main(int argc, char **argv){
 									
 									return arquivos;
 								}
-							}*/ /*
+							}*/
 				}
 				break;
 			case 2 :
@@ -195,8 +199,6 @@ int main(int argc, char **argv){
 			
 		}		
 	}while(op != 0);
-
-	*/
 return 0;
 }
 

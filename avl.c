@@ -2,7 +2,7 @@
 
 // retorna o novo nodo inserido
 TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree){
-	
+	if(palavra == NULL) return NULL;
 	if(tree->root == NULL){ // arvore vazia - inserir primeiro nodo
 		TpNodo *new = (TpNodo*) malloc(sizeof(TpNodo));
 		if(new != NULL){
