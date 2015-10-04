@@ -167,12 +167,37 @@ void rotacaoSimplesEsquerda(TpArvore *AVL, TpNodo *desb){
 	}
 }
 
+// rotacao dupla direita
 void rotacaoDuplaDireita(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao DUPLA a direita\n");
-	//printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->dir->info);
-	rotacaoSimplesEsquerda(AVL, desb->esq);
+	printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->dir->info);
+	TpNodo *aux;
+	TpNodo *aux2;
+
+	aux = desb->esq;
+	aux2 = aux->dir;
+
+	if(aux2->esq != NULL){
+		aux->dir = aux2->esq;
+		aux2->esq->pai = aux;
+	}else{
+		aux->dir = NULL;
+	}
+	aux2->pai = desb;
+	desb->esq = aux2;
+	aux->pai = aux2;
+	aux2->esq = aux;
+	rotacaoSimplesDireita(AVL, desb);
 	
 }
+
+// rotacao dupla esquerda
+void rotacaoDuplaEsquerda(TpArvore *AVL, TpNodo *desb){
+	puts("fazendo rotacao DUPLA a esquerda\n");
+	printf("nodos envolvidos %d %d %d", desb->info, desb->dir->info, desb->dir->e->info);
+	TpNodo *aux;
+	TpNodo *aux2;
+
 
 
 // calcula o fator de balanceamento de um nodo qualquer e retorna se existe nodo com fator desbalanceado

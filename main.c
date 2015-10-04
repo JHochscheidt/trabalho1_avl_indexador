@@ -12,6 +12,8 @@ int main(){
 	//puts("\n");
 	inserir(7, AVL->root, AVL);
 	imprimir(AVL->root);
+	inserir(1, AVL->root, AVL);
+	inserir(3, AVL->root, AVL);
 	
 	
 	puts("\n");
