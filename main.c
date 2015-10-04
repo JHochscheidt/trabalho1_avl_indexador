@@ -13,10 +13,16 @@ int main(){
 	inserir(12, AVL->root, AVL);
 	inserir(20, AVL->root, AVL);
 	inserir(17, AVL->root, AVL);
+	inserir(125, AVL->root, AVL);
+	inserir(175, AVL->root, AVL);
+	inserir(3, AVL->root, AVL);
+	inserir(4, AVL->root, AVL);
+	
 	imprimir(AVL->root);
 	//inserir(1, AVL->root, AVL);
 	//inserir(3, AVL->root, AVL);
-	
+
+	printf("altura da arvore", altura(AVL->root);
 	
 	puts("\n");
 	//imprimir(AVL->root);

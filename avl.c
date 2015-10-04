@@ -256,8 +256,6 @@ TpNodo *busca_nodo_desbalanceado(TpNodo* root){
 	}
 }
 
-
-
 // retorna um TpArvore com o campo root NULL , a raiz da arvore
 TpArvore* criaArvoreVazia(){
 	TpArvore *arv = (TpArvore*) malloc(sizeof (TpArvore));
