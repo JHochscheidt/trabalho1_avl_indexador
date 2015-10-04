@@ -1,14 +1,14 @@
 #define AVL_H
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 typedef struct _arvore{
 	struct _nodo *root;
 	int h;
 }TpArvore;
 
 typedef struct _nodo{
-	int info;
+	char* info;
 	int fat_b;
 	struct _nodo *pai;
 	struct _nodo *esq;
@@ -16,7 +16,7 @@ typedef struct _nodo{
 }TpNodo;
 
 /* 1. Função para inserção de nodos em uma AVL que armazene números inteiros. */
-TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree);
+TpNodo* inserir(char *palavra, TpNodo* root, TpArvore* tree);
 
 // funcao que retorna TpNodo desbalanceado - fat_b > 1 ou < -1
 TpNodo *busca_nodo_desbalanceado(TpNodo* root);
@@ -25,10 +25,10 @@ TpNodo *busca_nodo_desbalanceado(TpNodo* root);
 TpArvore* criaArvoreVazia(); // retorna um nodo NULL, a raiz da arvore
 
 // Função para criação de nodo
-TpNodo* criaNodo(int key);
+TpNodo* criaNodo(char *palavra);
 
 // Função que pede o valor a ser inserido na árvore
-int valor();
+//char* palavra();
 
 // Função para imprimir a árvore
 void imprimir(TpNodo* root);

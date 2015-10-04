@@ -1,22 +1,29 @@
 #include "avl.h"
 
 // retorna o novo nodo inserido
-TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
+TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree){
 	
 	if(tree->root == NULL){ // arvore vazia - inserir primeiro nodo
 		TpNodo *new = (TpNodo*) malloc(sizeof(TpNodo));
-		new->info = chave;
-		tree->root = new;
-		return new; 
+		if(new != NULL){
+			new->info = (char*) malloc(sizeof(char));
+			strcpy(new->info, palavra);
+			tree->root = new;
+			return new;
+		}
 	}else{
 		TpNodo *new;
-		if(chave < root->info){
+		int cmp; // pra pegar o resultado do strcmp
+		cmp = strcmp(palavra,root->info);
+		if(cmp < 0){ // palavra é menor que o root->atual, entao vai pra esquerda
 			if(root->esq == NULL){ // alocar e inserir nodo lado esquerdo
 				new = (TpNodo*) malloc(sizeof(TpNodo));
-				new->info = chave;
-				new->pai = root;
-				root->esq = new;
-
+				if(new != NULL){
+					new->info = (char*) malloc(sizeof(char));
+					strcpy(new->info, palavra);
+					new->pai = root;
+					root->esq = new;
+				}
 				TpNodo *desb = new->pai;
 				while(desb != NULL){
 					calcula_fator(desb);
@@ -55,15 +62,17 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 					calcula_fator(tree->root);
 				}
 			}else{
-				inserir(chave, root->esq, tree);
+				inserir(palavra, root->esq, tree);
 			}
-		}else if(chave > root->info){
+		}else if(cmp > 0){ // palavra é maior que o root->atual, entao vai pro lado direito
 			if(root->dir == NULL){ // alocar e inserir nodo lado direito
 				new = (TpNodo*) malloc(sizeof(TpNodo));
-				new->info = chave;
-				new->pai = root;
-				root->dir = new;
-
+				if(new != NULL){
+					new->info = (char*) malloc(sizeof(char));
+					strcpy(new->info, palavra);
+					new->pai = root;
+					root->dir = new;
+				}			
 				/* codigo replicado do if(chave < root->info) */
 				TpNodo *desb = new->pai;
 				while(desb != NULL){
@@ -103,15 +112,16 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 					calcula_fator(tree->root);
 				}		
 			}else{
-				inserir(chave,root->dir, tree);
+				inserir(palavra,root->dir, tree);
 			}
-		}else{
+		}else{ // palavra ja existe, deve-se inserir ela na lista do nodo atual que é ROOT
 			// ja existe nodo com esse valor
 			puts("\t\tVALOR JA EXISTE NA ARVORE\n\n");
 		}
 		calcula_fator(tree->root); // acho q aqui garante que ja nao existe mais desbalanceamento apos a insercao
 		return new;
-	}	
+	}
+	return NULL;
 }
 
 // rotacao simples a direita
@@ -264,33 +274,41 @@ TpArvore* criaArvoreVazia(){
 }
 
 // aloca nodo e insere informacao, retorna o novo TpNodo
-TpNodo* criaNodo(int key){
+TpNodo* criaNodo(char *palavra){
 	TpNodo *new = (TpNodo*) malloc(sizeof(TpNodo));
+	if(new != NULL){
+		new->info = (char*) malloc(sizeof(char));
+		strcpy(new->info, palavra);
+	}
 	new->dir = NULL;
 	new->esq = NULL;
 	new->pai = NULL;
 	new->fat_b = 0;
-	new->info = key;
 	return new;
 }
 
 // retorna valor da entrada padrao
-int valor(){
-	int valor;
-	printf("Informe o valor:\n");
-	scanf("%d", &valor);
-	return valor;
-}
+// nao esta funcionando
+/*char *palavra(){
+	char* palavra; 
+	printf("Informe a palavra:\n");
+	gets("%s", palavra);
+	return palavra;
+}*/
 
 void imprimir(TpNodo* root){
 	if(root){
 		printf("<");
 		imprimir(root->esq);
-		printf("([%d]fb%d)", root->info, root->fat_b);
+		printf("([%s]fb%d)", root->info, root->fat_b);
 		imprimir(root->dir);
 		printf(">");
 	}
 }
+
+
+
+
 
 
 
