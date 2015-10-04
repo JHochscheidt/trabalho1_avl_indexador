@@ -19,6 +19,8 @@ int main(){
 	inserir(110, AVL->root, AVL);
 	puts("\n");
 	imprimir(AVL->root);
+
+	printf("altura da arvore %d", altura(AVL->root));
 	/*inserir(30, AVL->root, AVL);
 	inserir(10, AVL->root, AVL);
 	imprimir(AVL->root);
