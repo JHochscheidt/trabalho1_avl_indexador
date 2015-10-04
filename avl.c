@@ -30,11 +30,11 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 				// foi inserido , entao pode-se fazer o calculo do fator da arvore e verificar desbalanceamento
 				if(desb != NULL){
 					// desb é o nodo desbalanceado
-					puts("// insercao desbalanceou a arvore>>\n");
+					puts("// insercao desbalanceou a arvore>>");
 					//calcula_fator(aux->esq);
 					//calcula_fator(aux->dir);
 					if(desb->fat_b == 2){ // rotacao a direita
-						puts("rotacao a direita>>\n");
+						puts("rotacao a direita>>");
 						if(desb->esq->fat_b == 1){ // rotacao simples
 							puts("rotacao simples>>\n");
 							rotacaoSimplesDireita(tree, desb);
@@ -43,7 +43,7 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 							rotacaoDuplaDireita(tree,desb);
 						}
 					}else if(desb->fat_b == -2){ // rotacao a esquerda
-						puts("rotacao a esquerda>>\n");
+						puts("rotacao a esquerda>>");
 						if(desb->dir->fat_b == -1){ // rotacao simples
 							puts("rotacao simples>>\n");
 							rotacaoSimplesEsquerda(tree, desb);
@@ -78,11 +78,11 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 				// foi inserido , entao pode-se fazer o calculo do fator da arvore e verificar desbalanceamento
 				if(desb != NULL){
 					// desb é o nodo desbalanceado
-					puts("// insercao desbalanceou a arvore>>\n");
+					puts("// insercao desbalanceou a arvore>>");
 					//calcula_fator(aux->esq);
 					//calcula_fator(aux->dir);
 					if(desb->fat_b == 2){ // rotacao a direita
-						puts("rotacao a direita>>\n");
+						puts("rotacao a direita>>");
 						if(desb->esq->fat_b == 1){ // rotacao simples
 							puts("rotacao simples>>\n");
 							rotacaoSimplesDireita(tree, desb);
@@ -91,7 +91,7 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 							rotacaoDuplaDireita(tree,desb);
 						}
 					}else if(desb->fat_b == -2){ // rotacao a esquerda
-						puts("rotacao a esquerda>>\n");
+						puts("rotacao a esquerda>>");
 						if(desb->dir->fat_b == -1){ // rotacao simples
 							puts("rotacao simples>>\n");
 							rotacaoSimplesEsquerda(tree, desb);
@@ -117,7 +117,7 @@ TpNodo* inserir(int chave, TpNodo* root, TpArvore* tree){
 // rotacao simples a direita
 void rotacaoSimplesDireita(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao simples a direita\n");
-	printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->esq->info);
+	//printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->esq->info);
 	TpNodo *aux;
 	aux = desb->esq;
 	if(aux->dir){
@@ -144,7 +144,7 @@ void rotacaoSimplesDireita(TpArvore *AVL, TpNodo *desb){
 // rotacao simples a esquerda
 void rotacaoSimplesEsquerda(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao simples a esquerda\n");
-	printf("nodos envolvidos %d %d %d", desb->info, desb->dir->info, desb->dir->dir->info);
+	//printf("nodos envolvidos %d %d %d", desb->info, desb->dir->info, desb->dir->dir->info);
 	TpNodo *aux;
 	aux = desb->dir;
 
@@ -172,7 +172,7 @@ void rotacaoSimplesEsquerda(TpArvore *AVL, TpNodo *desb){
 // rotacao dupla direita
 void rotacaoDuplaDireita(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao DUPLA a direita\n");
-	printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->dir->info);
+	//printf("nodos envolvidos %d %d %d", desb->info, desb->esq->info, desb->esq->dir->info);
 	TpNodo *aux;
 	TpNodo *aux2;
 
@@ -182,13 +182,23 @@ void rotacaoDuplaDireita(TpArvore *AVL, TpNodo *desb){
 	if(aux2->esq != NULL){
 		aux->dir = aux2->esq;
 		aux2->esq->pai = aux;
+		aux2->esq = aux;
 	}else{
 		aux->dir = NULL;
 	}
+
 	aux2->pai = desb;
-	desb->esq = aux2;
+	if(aux2->info < desb->info){
+		desb->esq = aux2;
+	}else{
+		desb->dir = aux2;
+	}
 	aux->pai = aux2;
-	aux2->esq = aux;
+	if(aux->info < aux2->info){
+		aux2->esq = aux;
+	}else{
+		aux->dir = aux;
+	}
 	rotacaoSimplesDireita(AVL, desb);
 	
 }
@@ -196,7 +206,7 @@ void rotacaoDuplaDireita(TpArvore *AVL, TpNodo *desb){
 // rotacao dupla esquerda
 void rotacaoDuplaEsquerda(TpArvore *AVL, TpNodo *desb){
 	puts("fazendo rotacao DUPLA a esquerda\n");
-	printf("nodos envolvidos %d %d %d", desb->info, desb->dir->info, desb->dir->esq->info);
+	//printf("nodos envolvidos %d %d %d", desb->info, desb->dir->info, desb->dir->esq->info);
 	TpNodo *aux;
 	TpNodo *aux2;
 
@@ -206,17 +216,25 @@ void rotacaoDuplaEsquerda(TpArvore *AVL, TpNodo *desb){
 	if(aux2->dir != NULL){
 		aux->esq = aux2->dir;
 		aux2->dir->pai = aux;
+		aux2->dir = aux;
+		aux->pai = aux2;
 	}else{
 		aux->esq = NULL;
 	}
 	aux2->pai = desb;
-	desb->dir = aux2;
-	aux->pai = aux2;
-	aux2->dir = aux;
+	if(aux2->info < desb->info){
+		desb->esq = aux2;
+	}else{
+		desb->dir = aux2;
+	}
+	if(aux->info < aux2->info){
+		aux2->esq = aux;
+	}else{
+		aux->dir = aux;
+	}	
 	rotacaoSimplesEsquerda(AVL, desb);
 	
 }
-
 
 // calcula o fator de balanceamento de um nodo qualquer e retorna se existe nodo com fator desbalanceado
 void calcula_fator(TpNodo* root){
