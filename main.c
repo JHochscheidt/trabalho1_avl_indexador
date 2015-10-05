@@ -41,7 +41,8 @@ int main(int argc, char **argv){
 					pFileTable = fopen(argv[1], "r");
 					if(pFileTable == NULL)
 						perror("ARQUIVO DE ENTRADA VAZIO\n");
-						
+					
+					size_t result;	
 					int nFiles;
 					unsigned len;
 					char *nomeArq = (char*) malloc(sizeof(char)); // para armazenar temporariamente o nome de cada arquivo
@@ -51,7 +52,7 @@ int main(int argc, char **argv){
 									
 					fgets(quantArquivos, 100, pFileTable); // pega a primeira linha do arquivo, que é o numero de arquivos
 					nFiles = atoi(quantArquivos);
-					printf("\nquantidade de arquivos >>>> %d \n", nFiles);
+				//	printf("\nquantidade de arquivos >>>> %d \n", nFiles);
 					// ok ate aqui
 					char *files[nFiles];  //fseek(pFileTable, 1, SEEK_CUR);// posiciona 1 byte p frente forçando a descer a linha
 					//ok ate aqui
@@ -72,9 +73,9 @@ int main(int argc, char **argv){
 						printf("\nimprimindo o nome dos arquivos >>\n");
 						for(cont = 0; cont < nFiles; cont++){ printf("[%s]\n", files[cont]); }
 					*/
-					printf("analisando arquivo >>");
+					//printf("analisando arquivo >>");
 					for(j=0;j < i;j++){// analisa 1 arquivo por vez
-						printf("[%s]\n", files[j]);
+						//printf("[%s]\n", files[j]);
 						if(files[j] == NULL)
 							continue;
 						FILE *pFile = fopen(files[j], "r");
@@ -83,49 +84,59 @@ int main(int argc, char **argv){
 							continue;
 						}
 						fseek(pFile, 0, SEEK_END); // posiciona para o final do arquivo
-						int tamanhoArquivo = ftell(pFile); // retorna a ultima posicao do arquivo, ou seja o tamanho dele
+						long tamanhoArquivo = ftell(pFile); // retorna a ultima posicao do arquivo, ou seja o tamanho dele
 						rewind(pFile); // volta arquivo para o começo
 						char *buffer = (char*) malloc(sizeof(char) * tamanhoArquivo); // buffer do tamanho do arquivo
-						puts("aqui");
-						while(fgets(buffer,tamanhoArquivo,pFile) != NULL){//pega por linha ou o arquivo inteiro
+						//puts("aqui");
+						result = fread(buffer,1,tamanhoArquivo,pFile);
+						if (result != tamanhoArquivo) {puts("Reading error"); exit (3);}
+						//puts("test");
+						char *pch;
+						//puts(buffer);
+						pch = strtok (buffer, ", .-?!,.:;\n");
+						//ajustaStr(buffer); 
+						//printf("pchlen: %d\n", (int)strlen(pch));
+						while(pch != NULL){//pega por linha ou o arquivo inteiro
 							//analisar aqui e por na arvore a ocorrencia junto com o ID do arq 
-							printf("antes len:%d\n", (int)strlen(buffer));	
-							ajustaStr(buffer); /*feito, ta sem o \n no fim da string. 
+							//printf("antes len:%d\n", (int)strlen(buffer));	
+							/*feito, ta sem o \n no fim da string. 
 													Temos que olhar p ela como se fosse uma sequencia de palavras independente da iteração
 													* Ou seja, uma palavra pode começar em uma iteração e terminar em outra, abc*/
-							printf("dps len:%d\n", (int)strlen(buffer));
-							char *pch;
-							printf ("%s  em tokens: \n Splitting seqüência \n", buffer);
-							pch = strtok (buffer, ", .-?!,.:;");
-							if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
-								inserir(pch, AateE->root, AateE);
-								imprimir(AateE->root);
-								}
-								while (pch != NULL){
-									printf ("%s \n", pch);
+						//	printf("dps len:%d\n", (int)strlen(buffer));
+							
+						//	printf ("%s  em tokens: \n Splitting seqüência \n", buffer);
+							puts(pch);
+							if(((int)strlen(pch)) < 4){
+								pch = strtok (NULL, ", .-?!,.:;\n");
+								continue;
+							}
+							puts(pch);
+							
+								//while (pch != NULL){
+								//	printf ("%s \n", pch);
 									if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
+										
 										inserir(pch, AateE->root, AateE);
-										imprimir(AateE->root);
+									
 									}else if(strncmp(pch, "F", 1) == 0 || strncmp(pch, "f", 1) == 0 || strncmp(pch, "G", 1) == 0 || strncmp(pch, "g", 1) == 0 || strncmp(pch, "H", 1) == 0 || strncmp(pch, "h", 1) == 0 || strncmp(pch, "I", 1) == 0 || strncmp(pch, "i", 1) == 0 || strncmp(pch, "J", 1) == 0 || strncmp(pch, "j", 1) == 0){
 										inserir(pch, FateJ->root, FateJ);
-										imprimir(FateJ->root);
 									}else if(strncmp(pch, "K", 1) == 0 || strncmp(pch, "k", 1) == 0 || strncmp(pch, "L", 1) == 0 || strncmp(pch, "l", 1) == 0 || strncmp(pch, "M", 1) == 0 || strncmp(pch, "m", 1) == 0 || strncmp(pch, "N", 1) == 0 || strncmp(pch, "n", 1) == 0 || strncmp(pch, "O", 1) == 0 || strncmp(pch, "o", 1) == 0){
 										inserir(pch, KateO->root, KateO);
-										imprimir(KateO->root);
 									}else if(strncmp(pch, "P", 1) == 0 || strncmp(pch, "p", 1) == 0 || strncmp(pch, "Q", 1) == 0 || strncmp(pch, "q", 1) == 0 || strncmp(pch, "R", 1) == 0 || strncmp(pch, "r", 1) == 0 || strncmp(pch, "S", 1) == 0 || strncmp(pch, "s", 1) == 0 || strncmp(pch, "T", 1) == 0 || strncmp(pch, "t", 1) == 0){
 										inserir(pch, PateT->root, PateT);
-										imprimir(PateT->root);
 									}else if(strncmp(pch, "U", 1) == 0 || strncmp(pch, "u", 1) == 0 || strncmp(pch, "V", 1) == 0 || strncmp(pch, "v", 1) == 0 || strncmp(pch, "W", 1) == 0 || strncmp(pch, "w", 1) == 0 || strncmp(pch, "X", 1) == 0 || strncmp(pch, "x", 1) == 0 || strncmp(pch, "Y", 1) == 0 || strncmp(pch, "y", 1) == 0 || strncmp(pch, "|", 1) == 0 || strncmp(pch, "z", 1) == 0){
 										inserir(pch, UateZ->root, UateZ);
-										imprimir(UateZ->root);
+										
+
 									}							
-									pch = strtok (NULL, ", .-?!,.:;");
-								}
-								//isalpha(buffer[j]);
-								puts(buffer);
-								puts(".");
+									pch = strtok (NULL, ", .-?!,.:;\n");
 									
 								}
+								//isalpha(buffer[j]);
+							//	puts(buffer);
+							//	puts(".");
+									
+								//}
 								/*--------------
 								varrer os arquivos carregando as palavras  
 								*/
@@ -188,6 +199,15 @@ int main(int argc, char **argv){
 									return arquivos;
 								}
 							}*/
+				
+				imprimir(AateE->root);			
+				imprimir(FateJ->root);	
+				imprimir(KateO->root);
+				imprimir(PateT->root);	
+				imprimir(UateZ->root);
+										
+
+
 				}
 				break;
 			case 2 :
