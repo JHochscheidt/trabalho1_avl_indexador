@@ -42,7 +42,7 @@ int main(int argc, char **argv){
 					if(pFileTable == NULL)
 						perror("ARQUIVO DE ENTRADA VAZIO\n");
 					
-					size_t result;	
+					//size_t result;	
 					int nFiles;
 					unsigned len;
 					char *nomeArq = (char*) malloc(sizeof(char)); // para armazenar temporariamente o nome de cada arquivo
@@ -56,6 +56,7 @@ int main(int argc, char **argv){
 					// ok ate aqui
 					char *files[nFiles];  //fseek(pFileTable, 1, SEEK_CUR);// posiciona 1 byte p frente forçando a descer a linha
 					//ok ate aqui
+					
 					while(fgets(nomeArq,100,pFileTable) != NULL && i < nFiles){// copia os nomes dos arquivos
 						//printf("arquivo >>>[%s]\n", nomeArq);
 						//if(validNameFile(nomeArq)){ // fazer essa verificacao na valida nome, verificar tbm a ajustaStr
@@ -74,11 +75,12 @@ int main(int argc, char **argv){
 						for(cont = 0; cont < nFiles; cont++){ printf("[%s]\n", files[cont]); }
 					*/
 					//printf("analisando arquivo >>");
+					FILE *pFile = NULL;
 					for(j=0;j < i;j++){// analisa 1 arquivo por vez
 						//printf("[%s]\n", files[j]);
 						if(files[j] == NULL)
 							continue;
-						FILE *pFile = fopen(files[j], "r");
+						pFile = fopen(files[j], "r");
 						if(pFile == NULL){
 							puts("arq n encontrado");
 							continue;
@@ -88,9 +90,19 @@ int main(int argc, char **argv){
 						rewind(pFile); // volta arquivo para o começo
 						char *buffer = (char*) malloc(sizeof(char) * tamanhoArquivo); // buffer do tamanho do arquivo
 						//puts("aqui");
-						result = fread(buffer,1,tamanhoArquivo,pFile);
-						if (result != tamanhoArquivo) {puts("Reading error"); exit (3);}
+						/*result = fread(buffer,1,tamanhoArquivo,pFile);
+						if (result != tamanhoArquivo) {puts("Reading error"); exit (3);}*/
 						//puts("test");
+						
+						//pFile = NULL;
+						int x;
+						puts("BUFFER VAZIO");
+						for(x=0;x<tamanhoArquivo ;x++){
+							buffer[x] = fgetc(pFile);
+						}
+						puts("BUFFER CHEIRO");
+						//puts(buffer);
+						//fclose(pFile);
 						char *pch;
 						//puts(buffer);
 						pch = strtok (buffer, ", .-?!,.:;\n");
@@ -105,28 +117,36 @@ int main(int argc, char **argv){
 						//	printf("dps len:%d\n", (int)strlen(buffer));
 							
 						//	printf ("%s  em tokens: \n Splitting seqüência \n", buffer);
-							puts(pch);
+							
 							if(((int)strlen(pch)) < 4){
 								pch = strtok (NULL, ", .-?!,.:;\n");
 								continue;
 							}
-							puts(pch);
+						//	puts(pch);
 							
 								//while (pch != NULL){
 								//	printf ("%s \n", pch);
 									if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
-										
+										//puts("A-E");
 										inserir(pch, AateE->root, AateE);
-									
+									//	puts("A-E/");
 									}else if(strncmp(pch, "F", 1) == 0 || strncmp(pch, "f", 1) == 0 || strncmp(pch, "G", 1) == 0 || strncmp(pch, "g", 1) == 0 || strncmp(pch, "H", 1) == 0 || strncmp(pch, "h", 1) == 0 || strncmp(pch, "I", 1) == 0 || strncmp(pch, "i", 1) == 0 || strncmp(pch, "J", 1) == 0 || strncmp(pch, "j", 1) == 0){
+										//puts("F-J");
 										inserir(pch, FateJ->root, FateJ);
+										//puts("F-J/");
 									}else if(strncmp(pch, "K", 1) == 0 || strncmp(pch, "k", 1) == 0 || strncmp(pch, "L", 1) == 0 || strncmp(pch, "l", 1) == 0 || strncmp(pch, "M", 1) == 0 || strncmp(pch, "m", 1) == 0 || strncmp(pch, "N", 1) == 0 || strncmp(pch, "n", 1) == 0 || strncmp(pch, "O", 1) == 0 || strncmp(pch, "o", 1) == 0){
+										//puts("K-O");
 										inserir(pch, KateO->root, KateO);
+										//puts("K-O/");
 									}else if(strncmp(pch, "P", 1) == 0 || strncmp(pch, "p", 1) == 0 || strncmp(pch, "Q", 1) == 0 || strncmp(pch, "q", 1) == 0 || strncmp(pch, "R", 1) == 0 || strncmp(pch, "r", 1) == 0 || strncmp(pch, "S", 1) == 0 || strncmp(pch, "s", 1) == 0 || strncmp(pch, "T", 1) == 0 || strncmp(pch, "t", 1) == 0){
+										//puts("P-T");
+										//imprimir(PateT->root);
 										inserir(pch, PateT->root, PateT);
+										//puts("P-T/");
 									}else if(strncmp(pch, "U", 1) == 0 || strncmp(pch, "u", 1) == 0 || strncmp(pch, "V", 1) == 0 || strncmp(pch, "v", 1) == 0 || strncmp(pch, "W", 1) == 0 || strncmp(pch, "w", 1) == 0 || strncmp(pch, "X", 1) == 0 || strncmp(pch, "x", 1) == 0 || strncmp(pch, "Y", 1) == 0 || strncmp(pch, "y", 1) == 0 || strncmp(pch, "|", 1) == 0 || strncmp(pch, "z", 1) == 0){
+										//puts("U-Z");
 										inserir(pch, UateZ->root, UateZ);
-										
+									//	puts("U-Z/");
 
 									}							
 									pch = strtok (NULL, ", .-?!,.:;\n");
@@ -140,8 +160,7 @@ int main(int argc, char **argv){
 								/*--------------
 								varrer os arquivos carregando as palavras  
 								*/
-								//fclose(pFile);
-								//pFile = NULL;
+								
 							}
 							/*
 							for(i = 1; i < argc; i++){

@@ -201,6 +201,7 @@ int validNameFile(char *fName){
 	}else 
 		return 0;
 }
+
 void ajustaStr(char *str){
 	
 	str[-1+(int)strlen(str)] = '\0'; // troca /n por /0
