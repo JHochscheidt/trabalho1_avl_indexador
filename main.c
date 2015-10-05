@@ -31,6 +31,8 @@ int main(int argc, char **argv){
 		TpArvore *UateZ = criaArvoreVazia();
 	int nlinha;
 	int op;
+	char *pch;	
+	FILE *pRank ;
 	do{
 		menu();
 		scanf("%d", &op);
@@ -55,8 +57,7 @@ int main(int argc, char **argv){
 					char *quantArquivos = (char*) malloc(sizeof(char)); // necessario para poder guardar a quant de arquivos
 					int i = 0;
 					int j = 0;
-					char *pch;	
-					
+							
 					fgets(quantArquivos, 100, pFileTable); // pega a primeira linha do arquivo, que é o numero de arquivos
 					nFiles = atoi(quantArquivos);	
 					char *files[nFiles]; 
@@ -93,10 +94,8 @@ int main(int argc, char **argv){
 									pch = strtok (NULL, ", .-?!,.:;");
 									continue;
 								}
-								
 								if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
-									//puts("A-E");
-									
+									//puts("A-E");									
 									inserir(pch, AateE->root, AateE, j, nlinha);
 								//	puts("A-E/");
 								}else if(strncmp(pch, "F", 1) == 0 || strncmp(pch, "f", 1) == 0 || strncmp(pch, "G", 1) == 0 || strncmp(pch, "g", 1) == 0 || strncmp(pch, "H", 1) == 0 || strncmp(pch, "h", 1) == 0 || strncmp(pch, "I", 1) == 0 || strncmp(pch, "i", 1) == 0 || strncmp(pch, "J", 1) == 0 || strncmp(pch, "j", 1) == 0){
@@ -117,37 +116,57 @@ int main(int argc, char **argv){
 									inserir(pch, UateZ->root, UateZ,j, nlinha);
 								//	puts("U-Z/");
 								}							
-								pch = strtok (NULL, ", .-?!,.:;");
-									
+								pch = strtok (NULL, ", .-?!,.:;");			
 							}
 						}
 										
 					}
-							
-				FILE *pRank = fopen("wordtable.txt", "w+");
-				 
-				imprimir(AateE->root, pRank);			
-				//imprimir(FateJ->root);	
-				//imprimir(KateO->root);
-				//imprimir(PateT->root);	
-				//imprimir(UateZ->root);
-										
-				fclose(pRank);
 				fclose(pFile);
-				
 				int tempo_decorrido = time(NULL) - segundos;
 				printf("TEMPO: %d\n", tempo_decorrido);
 				}
 				break;
 			case 2 :
-				puts("Nome d arquivo que deseja indexar");//Indexar arquivo
-				
-				break;
-			case 3 : // adicionar palavra em arquivo
+				pch= (char*) malloc(sizeof(char)*100);
+				puts("entre com a palavra a ser inserida no indice invertido");
+				fgets(pch,99, stdin);
+				if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
+					//puts("A-E");
+					inserir(pch, AateE->root, AateE, -1, -1);
+				//	puts("A-E/");
+				}else if(strncmp(pch, "F", 1) == 0 || strncmp(pch, "f", 1) == 0 || strncmp(pch, "G", 1) == 0 || strncmp(pch, "g", 1) == 0 || strncmp(pch, "H", 1) == 0 || strncmp(pch, "h", 1) == 0 || strncmp(pch, "I", 1) == 0 || strncmp(pch, "i", 1) == 0 || strncmp(pch, "J", 1) == 0 || strncmp(pch, "j", 1) == 0){
+					//puts("F-J");
+					inserir(pch, FateJ->root, FateJ,-1, -1);
+					//puts("F-J/");
+				}else if(strncmp(pch, "K", 1) == 0 || strncmp(pch, "k", 1) == 0 || strncmp(pch, "L", 1) == 0 || strncmp(pch, "l", 1) == 0 || strncmp(pch, "M", 1) == 0 || strncmp(pch, "m", 1) == 0 || strncmp(pch, "N", 1) == 0 || strncmp(pch, "n", 1) == 0 || strncmp(pch, "O", 1) == 0 || strncmp(pch, "o", 1) == 0){
+					//puts("K-O");
+					inserir(pch, KateO->root, KateO,-1, -1);
+					//puts("K-O/");
+				}else if(strncmp(pch, "P", 1) == 0 || strncmp(pch, "p", 1) == 0 || strncmp(pch, "Q", 1) == 0 || strncmp(pch, "q", 1) == 0 || strncmp(pch, "R", 1) == 0 || strncmp(pch, "r", 1) == 0 || strncmp(pch, "S", 1) == 0 || strncmp(pch, "s", 1) == 0 || strncmp(pch, "T", 1) == 0 || strncmp(pch, "t", 1) == 0){
+					//puts("P-T");
+					//imprimir(PateT->root);
+					inserir(pch, PateT->root, PateT,-1, -1);
+					//puts("P-T/");
+				}else if(strncmp(pch, "U", 1) == 0 || strncmp(pch, "u", 1) == 0 || strncmp(pch, "V", 1) == 0 || strncmp(pch, "v", 1) == 0 || strncmp(pch, "W", 1) == 0 || strncmp(pch, "w", 1) == 0 || strncmp(pch, "X", 1) == 0 || strncmp(pch, "x", 1) == 0 || strncmp(pch, "Y", 1) == 0 || strncmp(pch, "y", 1) == 0 || strncmp(pch, "|", 1) == 0 || strncmp(pch, "z", 1) == 0){
+					//puts("U-Z");
+					inserir(pch, UateZ->root, UateZ,-1, -1);
+				//	puts("U-Z/");
+				}	
 				break;
 			
+			case 3 : // adicionar palavra em arquivo
+				
+				pRank = fopen("wordtable.txt", "w+");
+				imprimir(AateE->root,pRank);
+				imprimir(FateJ->root,pRank);
+				imprimir(KateO->root,pRank);
+				imprimir(PateT->root,pRank);
+				imprimir(UateZ->root,pRank);
+				fclose(pRank);
+				break;
 		}		
 	}while(op != 0);
-return 0;
+	
+	return 0;
 }
 
