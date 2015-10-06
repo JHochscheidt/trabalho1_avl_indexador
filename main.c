@@ -6,8 +6,6 @@
 int main(int argc, char **argv){
 	
 	
-	time_t segundos = time(NULL);
-	
 	/*
 	TpArvore *teste = criaArvoreVazia();
 	inserir("abacate", teste->root, teste);
@@ -53,10 +51,12 @@ int main(int argc, char **argv){
 					//size_t result;	
 					int nFiles;
 					unsigned len;
-					char *nomeArq = (char*) malloc(sizeof(char)); // para armazenar temporariamente o nome de cada arquivo
-					char *quantArquivos = (char*) malloc(sizeof(char)); // necessario para poder guardar a quant de arquivos
+					char *nomeArq = (char*) malloc(sizeof(char)*100); // para armazenar temporariamente o nome de cada arquivo
+					char *quantArquivos = (char*) malloc(sizeof(char)*10); // necessario para poder guardar a quant de arquivos
 					int i = 0;
 					int j = 0;
+					char *buffer = NULL;
+					
 							
 					fgets(quantArquivos, 100, pFileTable); // pega a primeira linha do arquivo, que é o numero de arquivos
 					nFiles = atoi(quantArquivos);	
@@ -70,7 +70,7 @@ int main(int argc, char **argv){
 							i++;
 					}// nesse ponto files é um vetor de nomes válidos de arquivos a serem indexados (o ID de cada arquivo é sua posição em files + 1, ou seja i+1)
 					fclose(pFileTable);
-		
+					time_t segundos = time(NULL);
 					FILE *pFile = NULL;
 					for(j=0;j < i;j++){// analisa 1 arquivo por vez
 						if(files[j] == NULL)
@@ -83,15 +83,17 @@ int main(int argc, char **argv){
 						fseek(pFile, 0, SEEK_END); // posiciona para o final do arquivo
 						long tamanhoArquivo = ftell(pFile); // retorna a ultima posicao do arquivo, ou seja o tamanho dele
 						rewind(pFile); // volta arquivo para o começo
-						char *buffer = (char*) malloc(sizeof(char) * tamanhoArquivo); // buffer do tamanho do arquivo
+						buffer = (char*) malloc(sizeof(char)*(tamanhoArquivo/10)); // buffer do tamanho do arquivo
+						
 						
 						nlinha = 0;
-						while(fgets(buffer, tamanhoArquivo, pFile)){
+						while(fgets(buffer, (tamanhoArquivo/10), pFile)){
+					
 							nlinha++;
-							pch = strtok (buffer, ", .-?!,.:;");
+							pch = strtok (buffer, "@*$%#&, .-?!,.:;");
 							while(pch != NULL){
 								if(((int)strlen(pch)) < 4){
-									pch = strtok (NULL, ", .-?!,.:;");
+									pch = strtok (NULL, "@*$%#&, .-?!,.:;");
 									continue;
 								}
 								if(strncmp(pch, "A", 1) == 0 || strncmp(pch, "a", 1) == 0 || strncmp(pch, "B", 1) == 0 || strncmp(pch, "b", 1) == 0 || strncmp(pch, "C", 1) == 0 || strncmp(pch, "c", 1) == 0 || strncmp(pch, "D", 1) == 0 || strncmp(pch, "d", 1) == 0 || strncmp(pch, "E", 1) == 0 || strncmp(pch, "e", 1) == 0){
@@ -116,14 +118,18 @@ int main(int argc, char **argv){
 									inserir(pch, UateZ->root, UateZ,j, nlinha);
 								//	puts("U-Z/");
 								}							
-								pch = strtok (NULL, ", .-?!,.:;");			
+								pch = strtok (NULL, "@*$%#&, .-?!,.:;");			
+								
 							}
-						}
-										
-					}
-				fclose(pFile);
-				int tempo_decorrido = time(NULL) - segundos;
-				printf("TEMPO: %d\n", tempo_decorrido);
+						free(buffer);	
+						buffer = (char*) malloc(sizeof(char)*1024);
+						}				
+					free(buffer);
+					fclose(pFile);
+					}	
+					
+					int tempo_decorrido = time(NULL) - segundos;
+					printf("TEMPO: %d\n", tempo_decorrido);
 				}
 				break;
 			case 2 :

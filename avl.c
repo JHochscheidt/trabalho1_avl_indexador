@@ -6,7 +6,7 @@ TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree, int arqID, int linh
 	if(tree->root == NULL){ // arvore vazia - inserir primeiro nodo
 		TpNodo *new = criaNodo(palavra);
 		if(new != NULL){
-			new->info = (char*) malloc(sizeof(char) * strlen(palavra));
+			new->info = (char*) malloc(sizeof(char) * ((int)strlen(palavra)));
 			strcpy(new->info, palavra);
 			tree->root = new;
 			insereNodo(new, arqID, linhaID);
@@ -20,7 +20,7 @@ TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree, int arqID, int linh
 			if(root->esq == NULL){ // alocar e inserir nodo lado esquerdo
 				new = (TpNodo*) malloc(sizeof(TpNodo));
 				if(new != NULL){
-					new->info = (char*) malloc(sizeof(char));
+					new->info = (char*) malloc(sizeof(char)*((int)strlen(palavra)));
 					strcpy(new->info, palavra);
 					new->pai = root;
 					root->esq = new;
@@ -28,7 +28,8 @@ TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree, int arqID, int linh
 				}
 				TpNodo *desb = new->pai;
 				while(desb != NULL){
-					calcula_fator(desb);
+					desb->fat_b = (altura(desb->esq) - altura(desb->dir));
+					//calcula_fator(desb);
 					if(desb->fat_b == 2 || desb->fat_b == -2){
 						break;
 					}
@@ -56,7 +57,7 @@ TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree, int arqID, int linh
 			if(root->dir == NULL){ // alocar e inserir nodo lado direito
 				new = (TpNodo*) malloc(sizeof(TpNodo));
 				if(new != NULL){
-					new->info = (char*) malloc(sizeof(char));
+					new->info = (char*) malloc(sizeof(char)* ((int)strlen(palavra)));
 					strcpy(new->info, palavra);
 					new->pai = root;
 					root->dir = new;
@@ -66,7 +67,9 @@ TpNodo* inserir(char* palavra, TpNodo* root, TpArvore* tree, int arqID, int linh
 				TpNodo *desb = new->pai;
 				
 				while(desb != NULL){
-					calcula_fator(desb);
+					//puts("teucu");
+					//calcula_fator(desb);
+					desb->fat_b = (altura(desb->esq) - altura(desb->dir));
 					if(desb->fat_b == 2 || desb->fat_b == -2){
 						break;
 					}
